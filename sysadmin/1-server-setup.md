@@ -1,5 +1,5 @@
 ---
-title: Cloud server setup
+title: Server setup
 layout: page
 ---
 
