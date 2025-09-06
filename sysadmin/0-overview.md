@@ -12,7 +12,7 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
 ---
     
 
-              INTERNET
+            ( INTERNET )
 
                  ^
                  |
