@@ -1,4 +1,7 @@
-# Database setup
+---
+title: DB setup
+layout: page
+---
 
 EMMS4 requires MariaDB v10.11.13 or later, tested with v10.11.13.
 

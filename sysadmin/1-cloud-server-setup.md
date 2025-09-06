@@ -1,4 +1,7 @@
-# Cloud server setup
+---
+title: Cloud server setup
+layout: page
+---
 
 EMMS4 requires a Linux cloud server. We recommend a Digital Ocean droplet with Ubuntu 24.04 (LTS) x64 or later. Tested with Ubuntu 24.04 (LTS) x64. 
 

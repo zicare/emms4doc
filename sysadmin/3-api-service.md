@@ -1,4 +1,7 @@
-# EMMS4 API service
+---
+title: API service
+layout: page
+---
 
 ## Create the systemd service
 
