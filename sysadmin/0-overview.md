@@ -3,8 +3,6 @@ title: Overview
 layout: page
 ---
 
-## EMMS4 Sysadmin Quick Start
-
 This document provides a high-level overview of EMMS4 architecture and daily operations.  
 It is the starting point for sysadmins deploying and maintaining EMMS4.
 
