@@ -67,7 +67,7 @@ EMMS4 is made of six main parts:
      - `/u` → **Users** (MFI staff: officers, managers, finance, operations).  
      - `/c` → **Clients** (borrowers: check loan status, payments, arrears).  
      - `/s` → **Sponsors** (donors: see use of funds, transparency reports).  
-     - `/p` → **Public** (open access: stats for embedding in websites, live MFI stats, borrower stories, donation campaigns, etc.).  
+     - `/p` → **Public** (open access: **read-only** - live stats for embedding in websites, borrower stories, donation campaigns, etc.).  
    - Each module has **separate authentication** (except `/p`, which is public).  
 
 3. **Frontends**  
@@ -92,6 +92,7 @@ EMMS4 is made of six main parts:
 6. **Config**  
    - Find it at /home/emms/emms4/config/production.json.  
    - Holds smtp and database connection credentials, domain name, listening port, ssl certs path, the cron stored procedures list, etc.
+   - Editing requires service restart.
 
 **WARNING:** 
 - Never skip the cron step in production, even if the system seems to run fine.  
@@ -128,6 +129,7 @@ EMMS4 runs in strict daily cycles to ensure consistency, backups, and fresh arre
 **Result:**  
 - Two backups per day (pre + post).  
 - Backups rotate weekly, keeping **7 days of rolling history**.  
+- Backups are compressed with gzip. Expect ~10–15% of database size on disk.
 - Users always log in to a freshly maintained system in the morning.
 
 
