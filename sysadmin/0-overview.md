@@ -12,22 +12,21 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
 ---
     
 
-       +-------------------+
-       | Angular Frontends |
-       |-------------------|
-       |  /u  Users        |
-       |  /c  Clients      |
-       |  /s  Sponsors     |
-       |  /p  Public       |
-       +-------------------+
+              INTERNET
+
                  ^
                  |
                  v
-       +-------------------+
-       |       Nginx       |
-       |     (Reverse      |
-       |    Proxy + SSL)   |
-       +-------------------+
+
+       +-------------------+        +----------------+
+       |                   |        |    Frontends   | 
+       |      Nginx        |        |    (Angular)   |
+       |-------------------|        |----------------|
+       |   Frontend sites  | <----- | /u  Users      |
+       | API reverse Proxy |        | /c  Clients    |
+       |      SSL certs    |        | /s  Sponsors   |
+       |                   |        | /p  Public     |
+       +-------------------+        +----------------+
                  ^
                  |
                  v
