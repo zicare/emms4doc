@@ -49,7 +49,7 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
        |    Arrears, … )   |        |                |
        +-------------------+        +----------------+
 
-### Components
+## Components
 
 EMMS4 is made of six main parts:
 
