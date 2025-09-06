@@ -34,7 +34,7 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
        |     EMMS4 API     |
        |    (Go Binary)    |        +----------------+
        |-------------------|        |                |
-       |      Modules      | <----- |  Config (.ini) |
+       |      Modules      | <----- | Config (.json) |
        |-------------------|        |                |
        |  /u  Users        |        +----------------+
        |  /c  Clients      |                 |
@@ -90,7 +90,7 @@ EMMS4 is made of six main parts:
    - EMMS4 will not start unless cron has completed successfully.  
 
 6. **Config**  
-   - This is a plain text file in .ini format.  
+   - Find it at /home/emms/emms4/config/production.json.  
    - Holds smtp and database connection credentials, domain name, listening port, ssl certs path, the cron stored procedures list, etc.
 
 **WARNING:** 
@@ -143,7 +143,9 @@ Sysadmins are responsible for:
 - Verifying backups are rotated properly.  
 - Restoring from backup if cron execution causes inconsistencies.  
 - Keeping Nginx + certbot healthy for SSL renewals.  
-- Restarting services when needed.  
+- Restarting services when needed. 
+- Check systemctl status certbot monthly.
+- Run certbot renew --dry-run occasionally to ensure cert auto-renew is working. 
 
 
 <br>
