@@ -1,0 +1,4 @@
+title: EMMS4 Docs
+theme: minima
+plugins:
+  - jekyll-feed
