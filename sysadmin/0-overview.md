@@ -92,7 +92,7 @@ EMMS4 is made of six main parts:
 6. **Config**  
    - Find it at /home/emms/emms4/config/production.json.  
    - Holds smtp and database connection credentials, domain name, listening port, ssl certs path, the cron stored procedures list, etc.
-   - Editing requires service restart.
+   - Editing requires emms4 service restart.
 
 **WARNING:** 
 - Never skip the cron step in production, even if the system seems to run fine.  
