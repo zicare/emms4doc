@@ -1,6 +1,6 @@
 - [Sysadmin](sysadmin/0-overview.html)
 
-    Quick start guide for sysadmin. Setup EMMS4 db, server, apis, etc.
+    Quick start guide for the sysadmin. Setup EMMS4 db, server, apis, frontends, etc.
 
 - [User's Guide](user-guide/)
 
