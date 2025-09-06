@@ -7,8 +7,10 @@ This document provides a high-level overview of EMMS4 architecture and daily ope
 It is the starting point for sysadmins deploying and maintaining EMMS4.
 
 ---
+
 ## Core Architecture
 ---
+    
 
        +-------------------+
        | Angular Frontends |
@@ -50,8 +52,10 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
        +-------------------+        +----------------+
 
 ---
+
 ## Components
 ---
+    
 
 EMMS4 is made of six main parts:
 
@@ -95,8 +99,10 @@ EMMS4 is made of six main parts:
 - Doing so will accumulate inconsistencies in arrears and reporting data.
 
 ---
+
 ## Daily Cycles
 ---
+    
 
 EMMS4 runs in strict daily cycles to ensure consistency, backups, and fresh arrears.  
 
@@ -125,8 +131,10 @@ EMMS4 runs in strict daily cycles to ensure consistency, backups, and fresh arre
 - Users always log in to a freshly maintained system in the morning.
 
 ---
+
 ## Responsibilities
 ---
+    
 
 Sysadmins are responsible for:
 
@@ -138,9 +146,11 @@ Sysadmins are responsible for:
 - Restarting services when needed.  
 
 ---
+
 ## Quick Health Check
 ---
-
+    
+    
 Run these checks after setup, or anytime you suspect issues:
 
 ```bash
