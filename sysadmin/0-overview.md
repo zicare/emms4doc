@@ -6,10 +6,9 @@ layout: page
 This document provides a high-level overview of EMMS4 architecture and daily operations.  
 It is the starting point for sysadmins deploying and maintaining EMMS4.
 
----
-
 ## Core Architecture
 ---
+<br>
     
 
        +-------------------+
@@ -51,11 +50,10 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
        |    Arrears, … )   |        |                |
        +-------------------+        +----------------+
 
----
 
 ## Components
 ---
-    
+<br>
 
 EMMS4 is made of six main parts:
 
@@ -98,11 +96,10 @@ EMMS4 is made of six main parts:
 - Never skip the cron step in production, even if the system seems to run fine.  
 - Doing so will accumulate inconsistencies in arrears and reporting data.
 
----
 
 ## Daily Cycles
 ---
-    
+<br>
 
 EMMS4 runs in strict daily cycles to ensure consistency, backups, and fresh arrears.  
 
@@ -130,11 +127,9 @@ EMMS4 runs in strict daily cycles to ensure consistency, backups, and fresh arre
 - Backups rotate weekly, keeping **7 days of rolling history**.  
 - Users always log in to a freshly maintained system in the morning.
 
----
-
 ## Responsibilities
 ---
-    
+<br>
 
 Sysadmins are responsible for:
 
@@ -145,12 +140,10 @@ Sysadmins are responsible for:
 - Keeping Nginx + certbot healthy for SSL renewals.  
 - Restarting services when needed.  
 
----
-
 ## Quick Health Check
 ---
-    
-    
+<br>
+
 Run these checks after setup, or anytime you suspect issues:
 
 ```bash
