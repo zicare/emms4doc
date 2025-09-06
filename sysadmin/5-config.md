@@ -190,3 +190,4 @@ Response is capped at 1000 items (`icpp_max`).
 2. Ensure cert paths point to your Let’s Encrypt or other SSL certs.
 3. If cron fails, DB consistency may be affected. That’s why daily backups exist.
 4. Keep a copy of production.json in your backup plan.
+5. **Editing requires emms4 service restart.**
