@@ -31,18 +31,18 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
                  v
        +-------------------+
        |     EMMS4 API     |
-       |    (Go Binary)    |
-       |-------------------|
-       |      Modules      |
-       |-------------------|
-       |  /u  Users        |
-       |  /c  Clients      |
-       |  /s  Sponsors     |
-       |  /p  Public       |
-       +-------------------+
-                 ^
-                 |
-                 v
+       |    (Go Binary)    |        +----------------+
+       |-------------------|        |                |
+       |      Modules      | <----- |  Config (.ini) |
+       |-------------------|        |                |
+       |  /u  Users        |        +----------------+
+       |  /c  Clients      |                 |
+       |  /s  Sponsors     |                 |
+       |  /p  Public       |                 |
+       +-------------------+                 |
+                 ^                           |
+                 |                           |
+                 v                           v  
        +-------------------+        +----------------+
        |      MariaDB      |        |     Cron       |
        | (Loans, Payments, | <----> |  (Go Binary)   |
@@ -51,7 +51,7 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
 
 ### Components
 
-EMMS4 is made of five main parts:
+EMMS4 is made of six main parts:
 
 1. **MariaDB database**  
    Stores all data: loans, payments, arrears, calendars, users, etc.
@@ -83,6 +83,10 @@ EMMS4 is made of five main parts:
    - **If cron fails, the database can become inconsistent.**  
      That is why daily pre- and post-backups are critical.  
    - EMMS4 will not start unless cron has completed successfully.  
+
+6. **Config**  
+   - This is a plain text file in .ini format.  
+   - Holds smtp and database connection credentials, domain name, listening port, ssl certs path, the cron stored procedures list, etc.
 
 **WARNING:** 
 - Never skip the cron step in production, even if the system seems to run fine.  
