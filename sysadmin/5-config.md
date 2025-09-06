@@ -3,8 +3,6 @@ title: Config
 layout: page
 ---
 
-## Configuration file
-
 The EMMS4 backend is configured via a single JSON file:
 
 /home/emms/emms4/config/production.json
