@@ -1,5 +1,5 @@
 ---
-title: Server setup
+title: Server
 layout: page
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: DB setup
+title: Database
 layout: page
 ---
 
