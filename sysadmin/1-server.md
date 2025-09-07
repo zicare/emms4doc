@@ -7,7 +7,7 @@ EMMS4 requires a Linux cloud server. We recommend a Digital Ocean droplet with U
 
 Recommended/Tested droplet size: 8 GB Memory / 4 AMD vCPUs / 160 GB 
 
-## Server configuration
+## Setup
 
 Run these commands as root:
 
