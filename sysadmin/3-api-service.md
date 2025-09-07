@@ -81,10 +81,9 @@ Start EMMS4 before daily database maintenance has completed (e.g., after a fresh
 cd /home/emms/emms4
 sudo ./emms4 --skip-cron-check
 ```
-WARNING:
 
-The --skip-cron-check flag is for testing or migration only.
-Do not use it in normal production operations.
+**WARNING**
+> * The --skip-cron-check flag is for testing or migration only. Do not use it in normal production operations.
 
 Stop EMMS4 when running manually:
 Press Ctrl + C.

@@ -39,18 +39,18 @@ Result:
 
 ## Create emms4 databases
 
-NOTES:
+**NOTES**
 
-1. We recommend naming the database emms4. If you use another name, update the provided SQL scripts accordingly.
-2. For EMMS2 migration: restore a backup of the production EMMS2 database on the EMMS4 server as emms. If you use another name, adjust the migration scripts.
-3. Migration scripts will modify the source database (emms). Always restore from a copy, never run on the live production database.
-4. To restart from scratch after a failed setup: truncate emms4 (and emms if migrating), then rerun all setup steps.
-5. Example restore from a gzip backup:
+> * We recommend naming the database `emms4`. If you use another name, update the provided SQL scripts accordingly.
+> * For EMMS2 migration: restore a backup of the production EMMS2 database on the EMMS4 server as `emms`. If you use another name, adjust the migration scripts.
+> * Migration scripts will modify the source database (`emms`). Always restore from a copy, never run on the live production database.
+> * To restart from scratch after a failed setup: truncate `emms4` (and `emms` if migrating), then rerun all setup steps.
+> * Example restore from a gzip backup:
 ```bash
 gunzip -c /path/to/emms2bk.gz | mysql emms
 ```
 
-Steps
+### Steps
 
 Open a MariaDB shell as root:
 
@@ -132,14 +132,12 @@ Endpoints:
     PATCH /u/pwd (no auth)
 
 
-IMPORTANT: 
+**IMPORTANT**
+> * To run these endpoints you must first start the EMMS4 backend with --skip-cron-check.
+> * Stop the backend again once the calendars are rebuilt.
 
-1. To run these endpoints you must first start the EMMS4 backend with --skip-cron-check.
-2. Stop the backend again once the calendars are rebuilt.
-
-WARNING: 
-
-1. The --skip-cron-check flag is for installation/migration/test only. Never use it for regular operations.
+**WARNING** 
+> * The --skip-cron-check flag is for installation/migration/test only. Never use it for regular operations.
 
 ## Re-building the arrears table
 
@@ -180,7 +178,8 @@ systemctl start emms4
 
 Check config/production.json. The "cron" section defines the ~40 stored procedures executed by the cron binary (this is the “daily maintenance” list).
 
-WARNING: Adjust this only if you know exactly what you’re changing.
+**WARNING**
+> * Adjust this only if you know exactly what you’re changing.
 
 ### Skipping the maintenance check
 

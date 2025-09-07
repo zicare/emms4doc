@@ -7,44 +7,47 @@ The EMMS4 frontends are Angular applications delivered as static builds.
 Sysadmins are not expected to build Angular apps — the development team delivers pre-built folders.
 Your task is only to deploy them with nginx and set up SSL.
 
+**REMINDER**
+> SSL setup with Certbot requires that `DNS records` for your frontend domains (e.g. `ux.u.example.com`) already point to the server.  
+> Double-check DNS before running Certbot.
+
 ## Users frontend
 
 1. Copy the Angular build folder delivered by the development team into:
 
-```bash
-sudo mkdir -p /var/www/ux.u.example.com
-sudo cp -r /path/to/build/* /var/www/ux.u.example.com/
-```
+   ```bash
+   sudo mkdir -p /var/www/ux.u.example.com
+   sudo cp -r /path/to/build/* /var/www/ux.u.example.com/
+   ```
 
 2. Create a minimal nginx config at /etc/nginx/sites-available/ux.u.example.com:
 
-```bash
-server {
-    listen 80;
-    server_name ux.u.example.com;
+   ```bash
+   server {
+      listen 80;
+      server_name ux.u.example.com;
 
-    root /var/www/ux.u.example.com;
-    index index.html;
+      root /var/www/ux.u.example.com;
+      index index.html;
 
-    location / {
+      location / {
         try_files $uri /index.html;
-    }
-}
-```
+      }
+   }
+   ```
 
 3. Enable the site and reload nginx:
-
-```bash
-sudo ln -s /etc/nginx/sites-available/ux.u.example.com /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl reload nginx
-```
+   ```bash
+   sudo ln -s /etc/nginx/sites-available/ux.u.example.com /etc/nginx/sites-enabled/
+   sudo nginx -t
+   sudo systemctl reload nginx
+   ```
 
 4. Run certbot to obtain and install SSL:
 
-```bash
-sudo certbot --nginx -d ux.u.example.com
-```
+   ```bash
+   sudo certbot --nginx -d ux.u.example.com
+   ```
 
 This command will:
 
@@ -60,10 +63,9 @@ Repeat the same procedure for the other builds:
 * Sponsors: /var/www/ux.s.example.com → https://ux.s.example.com
 * Public: /var/www/ux.p.example.com → https://ux.p.example.com
 
-NOTES:
-
-* Each has its own folder under /var/www and its own nginx config.
-* Run certbot --nginx -d <domain> for each.
+**NOTES**
+> * Each has its own folder under /var/www and its own nginx config.
+> * Run certbot --nginx -d <domain> for each.
 
 ## Accessing the frontends
 

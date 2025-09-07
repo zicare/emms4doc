@@ -89,13 +89,12 @@ gpasswd -a sysadmin sudo
 usermod -s /bin/false tunnel
 ```
 
-NOTES:
+**NOTES**
+> * `emms` → service account that owns EMMS4 files and runs the API service.
+> * `tunnel` → restricted (no-shell) account, used only for SSH tunneling to allow secure remote database access.
+> * `sysadmin` → primary sysadmin account with sudo privileges.
 
-1. emms → service account that owns EMMS4 files and runs the API service.
-2. tunnel → restricted (no-shell) account, used only for SSH tunneling to allow secure remote database access.
-3. sysadmin → primary sysadmin account with sudo privileges.
-
-Setup .ssh directories and keys:
+### Setup .ssh directories and keys:
 
 ```bash
 mkdir /home/sysadmin/.ssh
@@ -121,15 +120,30 @@ Edit /etc/ssh/sshd_config:
 * Disable root login
 * Ensure PubkeyAuthentication yes is enabled
 
-IMPORTANT:
-
-Ensure you can log in with your new users before rebooting, otherwise you may lock yourself out.”
+**IMPORTANT**
+> Ensure you can log in with your new users before rebooting, otherwise you may lock yourself out.
 
 Restart to apply:
 
 ```bash
 reboot
 ```
+
+## DNS
+
+Ensure DNS entries exist for your API and frontend domains.  
+If you are using Digital Ocean, you can configure this in the **Networking → Domains** tab:
+
+1. Add an **A record** for each domain/subdomain (`api.example.com`, `ux.u.example.com`, etc.) pointing to your droplet’s public IP.
+2. Wait for propagation (usually a few minutes).
+3. Verify with:
+   ```bash
+   dig +short api.example.com
+   dig +short ux.u.example.com
+   ```
+   Result:
+   * Both should resolve to your droplet’s IP.
+   * Without correct DNS pointing to your server, Certbot cannot issue SSL certificates.
 
 ## Nginx
 
@@ -149,9 +163,8 @@ systemctl enable nginx
 certbot --nginx -d api.example.com --redirect
 ```
 
-NOTE:
-
-Certbot installs an automatic renewal timer, no manual action is required. Certificates auto-renew silently; nginx will pick them up without manual reload.
+**NOTE**
+> Certbot installs an automatic renewal timer, no manual action is required. Certificates auto-renew silently; nginx will pick them up without manual reload.
 
 ### Site config
 
@@ -214,10 +227,8 @@ chmod -R 755 /home/emms/emms4
 chmod +x /home/emms/emms4/cron
 chmod +x /home/emms/emms4/emms4
 ```
-### Warning!
-
-Even if EMMS4 files are in place, do not start the API yet.
-The database must be fully set up first.
+**WARNING**
+> Even if EMMS4 files are in place, do not start the API yet. The database must be fully set up first.
 
 ## Firewall
 
@@ -235,4 +246,5 @@ Outbound rules:
 * ICMP open
 * All TCP/UDP open
 
-IMPORTANT: Digital Ocean uses to block 465 and 587 ports. If that is the case, request DO to open those ports, otherwise features that involve sending an email like the pin request for password reset won't work.
+**IMPORTANT**
+> Digital Ocean uses to block 465 and 587 ports. If that is the case, request DO to open those ports, otherwise features that involve sending an email like the pin request for password reset won't work.

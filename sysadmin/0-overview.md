@@ -6,10 +6,7 @@ layout: page
 This document provides a high-level overview of EMMS4 architecture and daily operations.  
 It is the starting point for sysadmins deploying and maintaining EMMS4.
 
-
-<br>
 ## Core Architecture
----
     
 
             ( INTERNET )
@@ -51,10 +48,7 @@ It is the starting point for sysadmins deploying and maintaining EMMS4.
        +-------------------+        +----------------+
 
 
-<br>
 ## Components
----
-<br>
 
 EMMS4 is made of six main parts:
 
@@ -94,16 +88,12 @@ EMMS4 is made of six main parts:
    - Holds smtp and database connection credentials, domain name, listening port, ssl certs path, the cron stored procedures list, etc.
    - Editing requires emms4 service restart.
 
-**WARNING:** 
-- Never skip the cron step in production, even if the system seems to run fine.  
-- Doing so will accumulate inconsistencies in arrears and reporting data.
+**WARNING** 
+> Never skip the cron step in production, even if the system seems to run fine.  
+> Doing so will accumulate inconsistencies in arrears and reporting data.
 
 
-
-<br>
 ## Daily Cycles
----
-<br>
 
 EMMS4 runs in strict daily cycles to ensure consistency, backups, and fresh arrears.  
 
@@ -126,17 +116,19 @@ EMMS4 runs in strict daily cycles to ensure consistency, backups, and fresh arre
 5. **02:00 – Start APIs**  
    `systemctl start emms4`
 
-**Result:**  
+Result:
 - Two backups per day (pre + post).  
 - Backups rotate weekly, keeping **7 days of rolling history**.  
 - Backups are compressed with gzip. Expect ~10–15% of database size on disk.
 - Users always log in to a freshly maintained system in the morning.
 
+## DNS requirements
 
-<br>
+EMMS4 requires DNS records for the API and frontend domains (e.g. `api.example.com`, `ux.u.example.com`).  
+These must point to your cloud server’s public IP.  
+See the server setup guide for details.
+
 ## Responsibilities
----
-<br>
 
 Sysadmins are responsible for:
 
@@ -149,11 +141,7 @@ Sysadmins are responsible for:
 - Check systemctl status certbot monthly.
 - Run certbot renew --dry-run occasionally to ensure cert auto-renew is working. 
 
-
-<br>
 ## Quick Health Check
----
-<br>
 
 Run these checks after setup, or anytime you suspect issues:
 
