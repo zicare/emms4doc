@@ -47,8 +47,11 @@ Result:
 > * To restart from scratch after a failed setup: truncate `emms4` (and `emms` if migrating), then rerun all setup steps.
 > * Example restore from a gzip backup:
 ```bash
-gunzip -c /path/to/emms2bk.gz | mysql emms
+gunzip -c /path/to/emmsbk.gz | mysql emms
 ```
+
+**IMPORTANT**
+> * **If migrating from another EMMS4 installation, just restore the old EMMS4 database backup into the new EMMS4 database (`emms4`) and you are done with this guide, nothing else to do here. Skip to the next guide, API Service setup.** 
 
 ### Steps
 
