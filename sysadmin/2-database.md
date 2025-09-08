@@ -72,7 +72,7 @@ If migrating from EMMS2 restore a prebk.gz backup of the production EMMS2 databa
 ```bash
 gunzip -c /path/to/prebk.gz | mysql emms
 exit;
-
+```
 
 ## Structure - Tables and Views
 
