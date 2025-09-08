@@ -39,19 +39,14 @@ Result:
 
 ## Create emms4 databases
 
-**NOTES**
-
-> * We recommend naming the database `emms4`. If you use another name, update the provided SQL scripts accordingly.
-> * For EMMS2 migration: restore a backup of the production EMMS2 database on the EMMS4 server as `emms`. If you use another name, adjust the migration scripts.
-> * Migration scripts will modify the source database (`emms`). Always restore from a copy, never run on the live production database.
-> * To restart from scratch after a failed setup: truncate `emms4` (and `emms` if migrating), then rerun all setup steps.
-> * Example restore from a gzip backup:
-```bash
-gunzip -c /path/to/emmsbk.gz | mysql emms
-```
-
 **IMPORTANT**
-> * **If migrating from another EMMS4 installation, just restore the old EMMS4 database backup into the new EMMS4 database (`emms4`) and you are done with this guide, nothing else to do here. Skip to the next guide, API Service setup.** 
+> * **If migrating from another EMMS4 installation**, just restore the old EMMS4 database backup into the new EMMS4 database `emms4` and you are done with this guide, nothing else to do here. Skip to the next guide, API Service setup.
+
+**NOTES**
+> * We recommend naming the new EMMS4 database as `emms4`. If you use another name, update the provided SQL scripts accordingly.
+> * If migrating from EMMS2 restore a prebk.gz backup of the production EMMS2 database to the EMMS4 server as `emms`. If you use another name, adjust the migration scripts.
+> * To restart from scratch after a failed database setup/migration: drop `emms4` (and `emms` if migrating), then rerun all setup steps.
+> * If migrating from EMMS2  Migration scripts will modify the source database (`emms`). Always restore from a copy, never run on the live production database.
 
 ### Steps
 
@@ -71,6 +66,13 @@ grant all on *.* to 'sysadmin'@'localhost';
 flush privileges;
 exit;
 ```
+
+If migrating from EMMS2 restore a prebk.gz backup of the production EMMS2 database on the EMMS4 server as `emms`. If you use another name, adjust the migration scripts.
+
+```bash
+gunzip -c /path/to/prebk.gz | mysql emms
+exit;
+
 
 ## Structure - Tables and Views
 
