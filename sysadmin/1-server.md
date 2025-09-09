@@ -63,11 +63,25 @@ LC_ALL=en_US.UTF-8
 apt-get install mc chrony -y
 dpkg-reconfigure tzdata
 systemctl restart chrony
+reboot
 ```
 
-Verify:
+**IMPORTANT**
+> * After changing locale and timezone you **must reboot** the server. 
+> * If you skip this step, services like MariaDB may continue running with the old timezone, leading to login/session issues and wrong timestamps.  
+
+Verify/OS:
 ```bash
 date
+```
+Verify/MariaDB:
+```bash
+mariadb
+```
+
+```sql
+SELECT NOW();
+quit;
 ```
 
 ### Upload ssh public keys
