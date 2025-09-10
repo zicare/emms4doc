@@ -133,7 +133,7 @@ See the server setup guide for details.
 Sysadmins are responsible for:
 
 - Ensuring daily cycles run successfully.  
-- Checking `/var/log/emms4/cron.log` for cron completion.  
+- Checking `/home/emms/emms4/log/cron.log` for cron completion.  
 - Verifying backups are rotated properly.  
 - Restoring from backup if cron execution causes inconsistencies.  
 - Keeping Nginx + certbot healthy for SSL renewals.  
@@ -153,7 +153,7 @@ systemctl status emms4
 mariadb -e "SHOW DATABASES;"
 
 # Did cron run last night? (look for errors)
-tail -n 50 /var/log/emms4/cron.log
+tail -n 50 /home/emms/emms4/log/cron.log
 
 # Are backups rotating? (should see 7 weekday files)
 ls -lh /home/emms/emms4/backup

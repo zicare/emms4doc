@@ -156,18 +156,24 @@ Procedure definition: /db/structure/create/3-procedures-extras.sql.
 
 EMMS4 database requires daily maintenance. By default, EMMS4 won't start unless this maintenance has completed, even on the very first run.
 
-### Schedule the maintenance
+### Schedule the maintenance and database backup
 
-The maintenance is performed by the bundled cron binary. Schedule it under the emms user’s crontab (not root). Example:
+The maintenance is performed by the bundled cron binary. Schedule it under the root user’s crontab. Example:
 
 ```cron
 0 0 * * * /bin/systemctl stop emms4
-0 1 * * * cd /home/emms/emms4 && ./cron >> /var/log/emms4/cron.log 2>&1
+30 0 * * * mysqldump emms4 --single-transaction --quick --routines --triggers --events --add-drop-table --hex-blob | gzip -c > /home/emms/emms4/backup/emms4-$(date +\%a).pre.gz
+0 1 * * * sh -lc 'cd /home/emms/emms4 && sudo -u emms ./cron >> /home/emms/emms4/log/cron.log 2>&1'
+30 1 * * * mysqldump emms4 --single-transaction --quick --routines --triggers --events --add-drop-table --hex-blob | gzip -c > /home/emms/emms4/backup/emms4-$(date +\%a).post.gz
 0 2 * * * /bin/systemctl start emms4
 ```
 
-This stops the API at midnight, runs database maintenance at 01:00, then restarts the API at 02:00.
-The maintenance log will be written to /var/log/emms4/cron.log.
+Result:
+* This stops the API at midnight, runs database maintenance at 01:00, then restarts the API at 02:00.*
+* Two backups are taken daily: one at 00:30 and another at 01:30.
+* Each backup overwrites the file from the same weekday, maintaining a 7-day rotation.
+* Because mariadb root@localhost uses the unix_socket plugin, no password is required to run the db backup, and these jobs run non-interactively.
+* The maintenance log will be written to /home/emms/emms4/log/cron.log.
 
 ### Manual run - equivalent to the schedule
 
@@ -175,7 +181,9 @@ For a manual run, execute the steps below:
 
 ```bash
 systemctl stop emms4
+mysqldump emms4 --single-transaction --quick --routines --triggers --events --add-drop-table --hex-blob | gzip -c > /home/emms/emms4/backup/emms4-$(date +\%a).pre.gz
 cd /home/emms/emms4 && ./cron
+mysqldump emms4 --single-transaction --quick --routines --triggers --events --add-drop-table --hex-blob | gzip -c > /home/emms/emms4/backup/emms4-$(date +\%a).post.gz
 systemctl start emms4
 ```
 
@@ -195,23 +203,7 @@ cd /home/emms/emms4
 sudo -u emms ./emms4 --skip-cron-check --verbose
 ```
 
-## Database backup and restoring
-
-### Backup
-
-Schedule daily backups from the root crontab. Example:
-
-```cron
-30 0 * * * mysqldump emms4 --single-transaction --quick --routines --triggers --events --add-drop-table --hex-blob | gzip -c > /home/emms/emms4/backup/emms4-$(date +\%a).pre.gz
-30 1 * * * mysqldump emms4 --single-transaction --quick --routines --triggers --events --add-drop-table --hex-blob | gzip -c > /home/emms/emms4/backup/emms4-$(date +\%a).post.gz
-```
-
-* Two backups are taken daily: one at 00:30 and another at 01:30.
-* Each backup overwrites the file from the same weekday, maintaining a 7-day rotation.
-
-Because root@localhost uses the unix_socket plugin, no password is required, and these jobs run non-interactively.
-
-### Restore
+### Database restoring
 
 1. Ensure the emms4 database exists and is empty.
 2. Restore from any backup file (example: Monday pre-backup):
