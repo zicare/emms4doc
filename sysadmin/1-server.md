@@ -189,6 +189,8 @@ server {
     listen 443 ssl http2;
     server_name api.example.com;
 
+    client_max_body_size 20M;
+
     ssl_certificate     /etc/letsencrypt/live/api.example.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/api.example.com/privkey.pem;
 
