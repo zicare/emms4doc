@@ -112,14 +112,6 @@ This file is small but critical. It defines runtime behavior for security, datab
 * Controls password reset pins and validation rules.
 * Adjust subject line if needed.
 
-### TPS
-
-```json
-"tps": { "precision": 10, "clean_up_cycle": 1, "penalty_factor": 1 }
-```
-
-* Advanced/experimental tuning for abuse control. Default values usually work.
-
 ### Parameters
 
 ```json
